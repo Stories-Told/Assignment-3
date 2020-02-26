@@ -7,17 +7,20 @@
 
 using namespace std;
 
-// Global constant variable for max amount of
-// numbers that can be in the array
-const int MAX = 10000;
+// Global variable for row and column amount
+const int r = 100;
+const int c = 100;
+int COUNTER = 0;
+int trialNumber = 1;
 
 // Forward declarations
-void Number_Sorting(double arr[], double temp);
-double Calculate_Mean(double mean, double sum, double arr[]);
-double Find_Median(int halfOfElement, double temp, double arr[], double median);
-double Calculate_Standard_Deviation(double arr[], double mean, double sum, double standardDeviation);
-double Find_Minimum(double arr[], double temp, double minimum);
-double Find_Maximum(double arr[], double temp, double maximum);
+void Print_Trial_Number();
+void Number_Sorting(double arr[r][c], double temp);
+void Calculate_Mean(double arr[r][c]);
+void Find_Median(double arr[r][c]);
+void Calculate_Standard_Deviation(double arr[r][c]);
+void Find_Minimum(double arr[r][c]);
+void Find_Maximum(double arr[r][c]);
 void Print_Trial_Results();
 
 int main()
@@ -29,92 +32,148 @@ int main()
 }
 
 // Sorting function in ascending order
-void Number_Sorting(double arr[], double temp)
+void Number_Sorting(double arr[r][c], double temp)
 {
-    // Sorting in ascending order
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < r; i++)
     {
-        for (int j = 0; j < 100 - 1; j++)
+        for (int j = 0; j < c; j++)
         {
-            if (arr[j] > arr[j + 1])
+            for (int k = 0; k < c - j - 1; k++)
             {
-                temp = arr[j];
-                arr[j] = arr[j+1];
-                arr[j+1] = temp;
+                if(arr[i][k] > arr[i][k + 1])
+                {
+                    temp = arr[i][k];
+                    arr[i][k] = arr[i][k + 1];
+                    arr[i][k + 1] = temp;
+                }
             }
         }
     }
 }
 
+// Function to print trial number
+void Print_Trial_Number()
+{
+    cout << "trial: " << trialNumber << "           ";
+
+    trialNumber++;
+}
+
 // Calculates the mean of the sum of 100 numbers in the array
 // from the input file
-double Calculate_Mean(double mean, double sum, double arr[])
+void Calculate_Mean(double arr[r][c])
 {
-    for (int i = 0; i < 100; i++)
+    double mean[c];
+    double meanSum;
+
+    for (int i = 0; i < r; i++)
     {
-        sum += arr[i];
+        for (int j = 0; j < c; j++)
+        {
+            meanSum += arr[i][j];
+        }
+        mean[i] = meanSum / c;
+        meanSum = 0;
     }
 
-    mean = sum / 100;
-
-    return mean;
+        cout << left << fixed << setprecision(1) << "mean: " << mean[COUNTER] << "            ";
 }
 
 
 // Function to find the median value
-double Find_Median(int halfOfElement, double temp, double arr[], double median)
+void Find_Median(double arr[r][c])
 {
-    // Sorts 100 numbers in the array from descending order
+    int halfOfRow = 49;
+    double medianSum;
+    double median[c];
+    double temp;
+
     Number_Sorting(arr,temp);
 
-    median = (arr[halfOfElement] + arr[halfOfElement + 1]) / 2;
+    for (int i = 0; i < r; i++)
+    {
+        for (int j = 0; j < c; j++)
+        {
+            medianSum = (arr[i][halfOfRow] + arr[i][halfOfRow + 1]) / 2;
+        }
+        median[i] = medianSum;
+        medianSum = 0;
+    }
 
-    return median;
+    cout << left << fixed << setprecision(1) << "median: " << median[COUNTER] << "              ";
 }
 
 // Function to find the minimum value
-double Find_Minimum(double arr[], double temp, double minimum)
+void Find_Minimum(double arr[r][c])
 {
-    // Sort the 100 numbers in order to find the minimum value
-    Number_Sorting(arr,temp);
+    double minimumNum;
+    double minimum[c];
+    double temp;
 
-    // Take the first value, which is the smallest number
-    minimum = arr[0];
+    Number_Sorting(arr, temp);
 
-    return minimum;
+    for (int i = 0; i < r; i++)
+    {
+        for (int j = 0; j < c; j++)
+        {
+            minimumNum = arr[i][0];
+        }
+        minimum[i] = minimumNum;
+        minimumNum = 0;
+    }
+
+    cout << left << fixed << setprecision(1) << "min: " << minimum[COUNTER] << "           ";
 }
 
-double Find_Maximum(double arr[], double temp, double maximum)
+void Find_Maximum(double arr[r][c])
 {
-    Number_Sorting(arr,temp);
+    double maximumNum;
+    double maximum[c];
+    double temp;
 
-    maximum = arr[100 - 1];
+    Number_Sorting(arr, temp);
 
-    return maximum;
+    for (int i = 0; i < r; i++)
+    {
+        for (int j = 0; j < c; j++)
+        {
+            maximumNum = arr[i][100 - 1];
+        }
+        maximum[i] = maximumNum;
+        maximumNum = 0;
+    }
+
+    cout << left << fixed << setprecision(1) << "max: " << maximum[COUNTER] << "           ";
 }
 
-double Calculate_Standard_Deviation(double arr[], double mean, double sum, double standardDeviation)
+void Calculate_Standard_Deviation(double arr[r][c])
 {
-    // Calculate the mean of the numbers
-    for (int i = 0; i < 100; i++)
+    double sumMean;
+    double mean[c];
+    double sumSD;
+    double SD[c];
+
+    for (int i = 0; i < r; i++)
     {
-        sum += arr[i];
+        for (int j = 0; j < c; j++)
+        {
+            sumMean += arr[i][j];
+        }
+        mean[i] = sumMean / c;
+        sumMean = 0;
     }
-    mean = sum / 100;
 
-    // Reset sum to equal 0 in order to calculate
-    // standard deviation correctly
-    sum = 0;
-
-    // Calculate Standard Deviation
-    for (int i = 0; i < 100; ++i)
+    for (int i = 0; i < r; i++)
     {
-        sum += pow(arr[i] - mean, 2.0);
+        for (int j = 0; j < c; j++)
+        {
+            sumSD += pow(arr[i][j] - mean[i], 2.0);
+        }
+        SD[i] = sqrt(sumSD / 100);
+        sumSD = 0;
     }
-    sum = sum / 100;
-    standardDeviation = sqrt(sum);
 
-    return standardDeviation;
+    cout << left << fixed << setprecision(1) << "std dev: " << SD[COUNTER] << "               ";
 }
 
 void Print_Trial_Results()
@@ -139,7 +198,7 @@ void Print_Trial_Results()
 
     // Array variable to store all the numbers in the
     // input file
-    double arr[MAX];
+    double arr[100][100];
 
     // If statement to check and see if you
     // are reading from the input file
@@ -147,82 +206,31 @@ void Print_Trial_Results()
     {
         // for loop to store the numbers into
         // an array
-        for (int i = 0; i < MAX; i++)
+        for (int i = 0; i < r; i++)
         {
-            inFile >> arr[i];
+            for (int j = 0; j < c; j++)
+            {
+                inFile >> arr[i][j];
+            }
         }
     }
 
-    // Variables for calculating mean
-    double mean;
-    double sum;
-    // Variables for sorting function and finding median
-    double median;
-    int temp;
-    int halfOfElement = 49;
-    // Variable for holding the minimum value
-    double minimum;
-    // Variable for holding the maximum value
-    double maximum;
-    // Variable for calculating standard deviation
-    double standardDeviation;
+    // Variable for sorting function
+    double temp;
+    Number_Sorting(arr,temp);
 
-    // Formatted output of all required categories
-    cout << left // Start trial format
-         << setw(11)
-         << "trial 1"
-         << left // Start mean format
-         << "mean: "
-         << setw(12)
-         << fixed
-         << setprecision(1)
-         << Calculate_Mean(mean, sum, arr)
-         << left // Start median format
-         << "median: "
-         << setw(14)
-         << Find_Median(halfOfElement,temp,arr, median)
-         << left // Start minimum format
-         << "min: "
-         << setw(11)
-         << Find_Minimum(arr, temp, minimum)
-         << left // Start maximum format
-         << "max: "
-         << setw(11)
-         << Find_Maximum(arr, temp, maximum)
-         << left // Start standard deviation format
-         << "std dev: "
-         << setw(15)
-         << Calculate_Standard_Deviation(arr,mean,sum,standardDeviation)
-         << endl;
+    for (int i = 0; i < r; i++)
+    {
+        Print_Trial_Number();
+        Calculate_Mean(arr);
+        Find_Median(arr);
+        Find_Minimum(arr);
+        Find_Maximum(arr);
+        Calculate_Standard_Deviation(arr);
+        cout << endl;
 
-
-    // Output to new file, titled "results.txt"
-    outFile << left // Start trial format
-            << setw(11)
-            << "trial 1"
-            << left // Start mean format
-            << "mean: "
-            << setw(12)
-            << fixed
-            << setprecision(1)
-            << Calculate_Mean(mean, sum, arr)
-            << left // Start median format
-            << "median: "
-            << setw(14)
-            << Find_Median(halfOfElement,temp,arr, median)
-            << left // Start minimum format
-            << "min: "
-            << setw(11)
-            << Find_Minimum(arr, temp, minimum)
-            << left // Start maximum format
-            << "max: "
-            << setw(11)
-            << Find_Maximum(arr, temp, maximum)
-            << left // Start standard deviation format
-            << "std dev: "
-            << setw(15)
-            << Calculate_Standard_Deviation(arr,mean,sum,standardDeviation)
-            << endl;
+        COUNTER++;
+    }
 
     // Close the input and output files
     inFile.close();
