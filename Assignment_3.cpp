@@ -1,3 +1,12 @@
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+#include <string>
+#include <cstdlib>
+#include <cmath>
+
+using namespace std;
+
 // Global constant variable for max amount of
 // numbers that can be in the array
 const int MAX = 10000;
