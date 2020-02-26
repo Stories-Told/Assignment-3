@@ -76,7 +76,7 @@ void Calculate_Mean(double arr[r][c])
         meanSum = 0;
     }
 
-        cout << left << fixed << setprecision(1) << "mean: " << mean[COUNTER] << "            ";
+    cout << left << fixed << setprecision(1) << "mean: " << mean[COUNTER] << "            ";
 }
 
 
