@@ -145,7 +145,7 @@ void Print_Trial_Results()
     // are reading from the input file
     if(inFile.is_open())
     {
-        // While loop to keep looping and store the numbers into
+        // for loop to store the numbers into
         // an array
         for (int i = 0; i < MAX; i++)
         {
