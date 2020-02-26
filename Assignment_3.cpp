@@ -38,10 +38,6 @@ int main()
     // input file
     double arr[10000];
 
-    // Takes half of the first element and
-    // then can add by 100 for each new elements half
-    int halfOfElement = 49;
-
     // If statement to check and see if you
     // are reading from the input file
     if(inFile.is_open())
@@ -68,6 +64,7 @@ int main()
     double median;
     int n,o,j;
     int temp;
+    int halfOfElement = 49;
     // Output the sorted first 100 numbers
     cout << "Median: " << fixed << setprecision(1) << Find_Median(j,halfOfElement,temp,arr, median) << endl;
 
