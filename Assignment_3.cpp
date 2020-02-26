@@ -145,9 +145,6 @@ void Print_Trial_Results()
     // are reading from the input file
     if(inFile.is_open())
     {
-        // Variable for counting in the while loop
-        int i = 0;
-
         // While loop to keep looping and store the numbers into
         // an array
         for (int i = 0; i < MAX; i++)
