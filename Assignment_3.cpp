@@ -102,6 +102,8 @@ double Calculate_Standard_Deviation(double arr[], double mean, double sum, doubl
     }
     mean = sum / 100;
 
+    // Reset sum to equal 0 in order to calculate
+    // standard deviation correctly
     sum = 0;
 
     // Calculate Standard Deviation
@@ -143,7 +145,6 @@ void Print_Trial_Results()
     // are reading from the input file
     if(inFile.is_open())
     {
-
         // Variable for counting in the while loop
         int i = 0;
 
@@ -158,28 +159,73 @@ void Print_Trial_Results()
     // Variables for calculating mean
     double mean;
     double sum;
-    // Output the mean for the first 100 numbers in the array
-    cout << "Mean: " << fixed << setprecision(1) << Calculate_Mean(mean, sum, arr) << endl;
-
     // Variables for sorting function and finding median
     double median;
     int temp;
     int halfOfElement = 49;
-    // Output the sorted first 100 numbers
-    cout << "Median: " << fixed << setprecision(1) << Find_Median(halfOfElement,temp,arr, median) << endl;
-
     // Variable for holding the minimum value
     double minimum;
-    // Find the minimum value
-    cout << "Minimum: " << fixed << setprecision(1) << Find_Minimum(arr, temp, minimum) << endl;
-
     // Variable for holding the maximum value
     double maximum;
-    cout << "Maximum: " << fixed << setprecision(1) << Find_Maximum(arr, temp, maximum) << endl;
-
     // Variable for calculating standard deviation
     double standardDeviation;
-    cout << "Standard Deviation: " << fixed << setprecision(1) << Calculate_Standard_Deviation(arr,mean,sum,standardDeviation) << endl;
+
+    // Formatted output of all required categories
+    cout << left // Start trial format
+         << setw(11)
+         << "trial 1"
+         << left // Start mean format
+         << "mean: "
+         << setw(12)
+         << fixed
+         << setprecision(1)
+         << Calculate_Mean(mean, sum, arr)
+         << left // Start median format
+         << "median: "
+         << setw(14)
+         << Find_Median(halfOfElement,temp,arr, median)
+         << left // Start minimum format
+         << "min: "
+         << setw(11)
+         << Find_Minimum(arr, temp, minimum)
+         << left // Start maximum format
+         << "max: "
+         << setw(11)
+         << Find_Maximum(arr, temp, maximum)
+         << left // Start standard deviation format
+         << "std dev: "
+         << setw(15)
+         << Calculate_Standard_Deviation(arr,mean,sum,standardDeviation)
+         << endl;
+
+
+    // Output to new file, titled "results.txt"
+    outFile << left // Start trial format
+            << setw(11)
+            << "trial 1"
+            << left // Start mean format
+            << "mean: "
+            << setw(12)
+            << fixed
+            << setprecision(1)
+            << Calculate_Mean(mean, sum, arr)
+            << left // Start median format
+            << "median: "
+            << setw(14)
+            << Find_Median(halfOfElement,temp,arr, median)
+            << left // Start minimum format
+            << "min: "
+            << setw(11)
+            << Find_Minimum(arr, temp, minimum)
+            << left // Start maximum format
+            << "max: "
+            << setw(11)
+            << Find_Maximum(arr, temp, maximum)
+            << left // Start standard deviation format
+            << "std dev: "
+            << setw(15)
+            << Calculate_Standard_Deviation(arr,mean,sum,standardDeviation)
+            << endl;
 
     // Close the input and output files
     inFile.close();
