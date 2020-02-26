@@ -22,7 +22,7 @@ void Print_Trial_Results();
 
 int main()
 {
-    // Outputs the results of all 100 trials
+    // Outputs the results of all 100 trials and calculations
     Print_Trial_Results();
 
     return 0;
