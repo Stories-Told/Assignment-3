@@ -60,10 +60,11 @@ double Calculate_Mean(double mean, double sum, double arr[])
     return mean;
 }
 
-// Sorts 100 numbers in the array from descending order
-// and finds the median(middle) number of the number set
+
+// Function to find the median value
 double Find_Median(int halfOfElement, double temp, double arr[], double median)
 {
+    // Sorts 100 numbers in the array from descending order
     Number_Sorting(arr,temp);
 
     median = (arr[halfOfElement] + arr[halfOfElement + 1]) / 2;
