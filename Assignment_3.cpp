@@ -1,90 +1,20 @@
-#include <iostream>
-#include <fstream>
-#include <iomanip>
-#include <string>
-#include <cstdlib>
-#include <cmath>
-
-using namespace std;
+// Global constant variable for max amount of
+// numbers that can be in the array
+const int MAX = 10000;
 
 // Forward declarations
 void Number_Sorting(double arr[], double temp);
 double Calculate_Mean(double mean, double sum, double arr[]);
-double Find_Median(int j, int halfOfElement, double temp, double arr[], double median);
+double Find_Median(int halfOfElement, double temp, double arr[], double median);
 double Calculate_Standard_Deviation(double arr[], double mean, double sum, double standardDeviation);
 double Find_Minimum(double arr[], double temp, double minimum);
 double Find_Maximum(double arr[], double temp, double maximum);
+void Print_Trial_Results();
 
 int main()
 {
-    // Input file
-    ifstream inFile;
-    // Output file
-    ofstream outFile;
-
-    // Open the input file
-    inFile.open("stats.txt");
-    // Create new output file
-    outFile.open("results.txt");
-
-    // Check to see if the file could be opened
-    if (!inFile)
-    {
-        cerr << "Unable to open file stats.txt..." << endl;
-        exit(1);
-    }
-
-    // Array variable to store all the numbers in the
-    // input file
-    double arr[10000];
-
-    // If statement to check and see if you
-    // are reading from the input file
-    if(inFile.is_open())
-    {
-
-        // Variable for counting in the while loop
-        int i = 0;
-
-        // While loop to keep looping and store the numbers into
-        // an array
-        for (int i = 0; i < 100; i++)
-        {
-            inFile >> arr[i];
-        }
-    }
-
-    // Variables for calculating mean
-    double mean;
-    double sum;
-    // Output the mean for the first 100 numbers in the array
-    cout << "Mean: " << fixed << setprecision(1) << Calculate_Mean(mean, sum, arr) << endl;
-
-    // Variables for sorting function and finding median
-    double median;
-    int n,o,j;
-    int temp;
-    int halfOfElement = 49;
-    // Output the sorted first 100 numbers
-    cout << "Median: " << fixed << setprecision(1) << Find_Median(j,halfOfElement,temp,arr, median) << endl;
-
-    // Variable for holding the minimum value
-    double minimum;
-    // Find the minimum value
-    cout << "Minimum: " << fixed << setprecision(1) << Find_Minimum(arr, temp, minimum) << endl;
-
-    // Variable for holding the maximum value
-    double maximum;
-    cout << "Maximum: " << fixed << setprecision(1) << Find_Maximum(arr, temp, maximum) << endl;
-
-    // Variable for calculating standard deviation
-    double standardDeviation;
-    cout << "Standard Deviation: " << fixed << setprecision(1) << Calculate_Standard_Deviation(arr,mean,sum,standardDeviation) << endl;
-
-
-    // Close the input and output files
-    inFile.close();
-    outFile.close();
+    // Outputs the results of all 100 trials
+    Print_Trial_Results();
 
     return 0;
 }
@@ -123,7 +53,7 @@ double Calculate_Mean(double mean, double sum, double arr[])
 
 // Sorts 100 numbers in the array from descending order
 // and finds the median(middle) number of the number set
-double Find_Median(int j, int halfOfElement, double temp, double arr[], double median)
+double Find_Median(int halfOfElement, double temp, double arr[], double median)
 {
     Number_Sorting(arr,temp);
 
@@ -177,5 +107,71 @@ double Calculate_Standard_Deviation(double arr[], double mean, double sum, doubl
 
 void Print_Trial_Results()
 {
+    // Input file
+    ifstream inFile;
+    // Output file
+    ofstream outFile;
 
+    // Open the input file
+    inFile.open("stats.txt");
+    // Create new output file
+    outFile.open("results.txt");
+
+    // Check to see if the file could be opened
+    // if not throw an error
+    if (!inFile)
+    {
+        cerr << "Unable to open file stats.txt..." << endl;
+        exit(1); // Exit the program cleanly
+    }
+
+    // Array variable to store all the numbers in the
+    // input file
+    double arr[MAX];
+
+    // If statement to check and see if you
+    // are reading from the input file
+    if(inFile.is_open())
+    {
+
+        // Variable for counting in the while loop
+        int i = 0;
+
+        // While loop to keep looping and store the numbers into
+        // an array
+        for (int i = 0; i < MAX; i++)
+        {
+            inFile >> arr[i];
+        }
+    }
+
+    // Variables for calculating mean
+    double mean;
+    double sum;
+    // Output the mean for the first 100 numbers in the array
+    cout << "Mean: " << fixed << setprecision(1) << Calculate_Mean(mean, sum, arr) << endl;
+
+    // Variables for sorting function and finding median
+    double median;
+    int temp;
+    int halfOfElement = 49;
+    // Output the sorted first 100 numbers
+    cout << "Median: " << fixed << setprecision(1) << Find_Median(halfOfElement,temp,arr, median) << endl;
+
+    // Variable for holding the minimum value
+    double minimum;
+    // Find the minimum value
+    cout << "Minimum: " << fixed << setprecision(1) << Find_Minimum(arr, temp, minimum) << endl;
+
+    // Variable for holding the maximum value
+    double maximum;
+    cout << "Maximum: " << fixed << setprecision(1) << Find_Maximum(arr, temp, maximum) << endl;
+
+    // Variable for calculating standard deviation
+    double standardDeviation;
+    cout << "Standard Deviation: " << fixed << setprecision(1) << Calculate_Standard_Deviation(arr,mean,sum,standardDeviation) << endl;
+
+    // Close the input and output files
+    inFile.close();
+    outFile.close();
 }
