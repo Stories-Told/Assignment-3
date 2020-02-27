@@ -61,8 +61,8 @@ void Number_Sorting(double arr[r][c], double temp)
                 if(arr[i][k] > arr[i][k + 1]) // If statement checking if the proceeding number is smaller than the number before it
                 {
                     temp = arr[i][k]; // If the number is larger store in temp holding
-                    arr[i][k] = arr[i][k + 1]; // the larger number now equals the number in front of it in the array
-                    arr[i][k + 1] = temp; // That number is now held in temp holding for next loop
+                    arr[i][k] = arr[i][k + 1]; // The larger number now equals the smaller number
+                    arr[i][k + 1] = temp; // The smaller number gets stored in temp for next loop
                 }
             }
         }
