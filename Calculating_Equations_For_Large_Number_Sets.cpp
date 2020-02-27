@@ -92,7 +92,7 @@ void Calculate_Mean(double arr[r][c])
         {
             meanSum += arr[i][j]; // Loops for the entire column (variable c) and adds them together
         }
-        mean[i] = meanSum / c; // saves the mean entire an array starting at 0 until 100
+        mean[i] = meanSum / c; // saves the mean int an array starting at 0 until 100
         meanSum = 0; // resets sum of mean back to 0 in order to calculate a new mean
     }
 
