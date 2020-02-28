@@ -58,11 +58,11 @@ void Number_Sorting(double arr[r][c], double temp)
         {
             for (int k = 0; k < c - j - 1; k++) // For loop for sorting function
             {
-                if(arr[i][k] > arr[i][k + 1]) // If statement checking if the proceeding number is smaller than the number before it
+                if(arr[i][k] > arr[i][k + 1]) // If statement checking if a number before another number in the array is larger
                 {
-                    temp = arr[i][k]; // If the number is larger store in temp holding
-                    arr[i][k] = arr[i][k + 1]; // The larger number now equals the smaller number
-                    arr[i][k + 1] = temp; // The smaller number gets stored in temp for next loop
+                    temp = arr[i][k]; // If the number is larger it is stored in temp holding, I.E: Temp is arr[0][0] = {7}
+                    arr[i][k] = arr[i][k + 1]; // Then the smaller number is now stored in the larger numbers array spot. I.E move backwards one spot in the array
+                    arr[i][k + 1] = temp; // The larger number(Which was stored in temp) is now stored where the smaller number was in the array.
                 }
             }
         }
