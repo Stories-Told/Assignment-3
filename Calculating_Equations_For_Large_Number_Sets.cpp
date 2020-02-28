@@ -12,7 +12,7 @@ ifstream inFile;
 // Output file
 ofstream outFile;
 
-// Global variable for row, column, Counter, and trial number
+// Global variable for row, column, Counter, and trial number counter
 const int r = 100; // Change if need more rows for more numbers
 const int c = 100; // Change if need more columns for more numbers
 int COUNTER = 0; // Used in order to output the correct output for each trial from 1-100
