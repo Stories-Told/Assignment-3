@@ -232,7 +232,7 @@ void Print_Trial_Results()
 {
     // Array variable to store all the numbers in the
     // input file
-    double arr[100][100];
+    double arr[r][c];
 
     // If statement to check and see if you
     // are reading from the input file
