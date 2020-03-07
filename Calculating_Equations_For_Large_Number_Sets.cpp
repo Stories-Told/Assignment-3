@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------------------*
 |                                                                                     |
-| Program that takes as many numbers as there are in are .txt file                    |
+| Program that takes as many numbers as there are in a .txt file                      |
 | and calculates the following in sets of 100: Mean, median, standard deviation,      |
 | min, max, and sorts sets of 100 numbers in ascending order. The program             |
 | then outputs the results to the console and to a new .txt file named "results.txt"  |
