@@ -1,3 +1,12 @@
+/*------------------------------------------------------------------------------------*
+|                                                                                     |
+| Program that takes as many numbers as there are in are .txt file                    |
+| and calculates the following in sets of 100: Mean, median, standard deviation,      |
+| min, max, and sorts sets of 100 numbers in ascending order. The program             |
+| then outputs the results to the console and to a new .txt file named "results.txt"  |
+|                                                                                     |
+*------------------------------------------------------------------------------------*/
+
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -12,7 +21,7 @@ ifstream inFile;
 // Output file
 ofstream outFile;
 
-// Global variable for row, column, Counter, and trial number counter
+// Global variable for row, column, Counter, and trial number
 const int r = 100; // Change if need more rows for more numbers
 const int c = 100; // Change if need more columns for more numbers
 int COUNTER = 0; // Used in order to output the correct output for each trial from 1-100
@@ -77,6 +86,52 @@ void Print_Trial_Number()
     outFile << "trial: " << setw(11) << left << trialNumber;
 }
 
+// Takes all the calculations for all the functions and
+// places them in one spot in order to print to console
+// and results.txt
+void Print_Trial_Results()
+{
+    // Array variable to store all the numbers in the
+    // input file
+    double arr[r][c];
+
+    // If statement to check and see if you
+    // are reading from the input file
+    if(inFile.is_open())
+    {
+        // for loop to store the numbers into
+        // an multi dimensional array(100x100)
+        for (int i = 0; i < r; i++) // For loop for row(r)
+        {
+            for (int j = 0; j < c; j++) // For loop for column(c)
+            {
+                inFile >> arr[i][j]; // Takes numbers from input file and stores in multi dimensional array(100x100)
+            }
+        }
+    }
+
+    // Variable for sorting function
+    double temp;
+    Number_Sorting(arr,temp); // Sorts numbers in ascending order
+
+    // For loop to output each rows results one at a time
+    for (int i = 0; i < r; i++)
+    {
+        Print_Trial_Number();
+        Calculate_Mean(arr);
+        Find_Median(arr);
+        Find_Minimum(arr);
+        Find_Maximum(arr);
+        Calculate_Standard_Deviation(arr);
+
+        cout << endl; // Starts new line for next row
+        outFile << endl; // Starts new line for next row
+
+        COUNTER++; // Adds 1 to the global counter in order to proceed to the next row
+        trialNumber++; // Adds 1 to the global trial number in order to reflect the correct row in the output
+    }
+}
+
 // Calculates the mean of the sum of 100 numbers in the array
 // per row of the multi dimension array
 void Calculate_Mean(double arr[r][c])
@@ -92,7 +147,7 @@ void Calculate_Mean(double arr[r][c])
         {
             meanSum += arr[i][j]; // Loops for the entire column (variable c) and adds them together
         }
-        mean[i] = meanSum / c; // saves the mean int an array starting at 0 until 100
+        mean[i] = meanSum / c; // saves the mean entire an array starting at 0 until 100
         meanSum = 0; // resets sum of mean back to 0 in order to calculate a new mean
     }
 
@@ -222,51 +277,5 @@ void Throw_Error()
     {
         cerr << "Unable to open file stats.txt..." << endl;
         exit(1); // Exit the program cleanly
-    }
-}
-
-// Takes all the calculations for all the functions and
-// places them in one spot in order to print to console
-// and results.txt
-void Print_Trial_Results()
-{
-    // Array variable to store all the numbers in the
-    // input file
-    double arr[r][c];
-
-    // If statement to check and see if you
-    // are reading from the input file
-    if(inFile.is_open())
-    {
-        // for loop to store the numbers into
-        // an multi dimensional array(100x100)
-        for (int i = 0; i < r; i++) // For loop for row(r)
-        {
-            for (int j = 0; j < c; j++) // For loop for column(c)
-            {
-                inFile >> arr[i][j]; // Takes numbers from input file and stores in multi dimensional array(100x100)
-            }
-        }
-    }
-
-    // Variable for sorting function
-    double temp;
-    Number_Sorting(arr,temp); // Sorts numbers in ascending order
-
-    // For loop to output each rows results one at a time
-    for (int i = 0; i < r; i++)
-    {
-        Print_Trial_Number();
-        Calculate_Mean(arr);
-        Find_Median(arr);
-        Find_Minimum(arr);
-        Find_Maximum(arr);
-        Calculate_Standard_Deviation(arr);
-
-        cout << endl; // Starts new line for next row
-        outFile << endl; // Starts new line for next row
-
-        COUNTER++; // Adds 1 to the global counter in order to proceed to the next row
-        trialNumber++; // Adds 1 to the global trial number in order to reflect the correct row in the output
     }
 }
